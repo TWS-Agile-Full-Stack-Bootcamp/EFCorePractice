@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using EFCorePractice.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,10 +11,20 @@ namespace EFCorePractice.Controllers
     [Route("companies")]
     public class CompanyController : ControllerBase
     {
+        private readonly EFDBContext _efdbContext;
+
+        public CompanyController(EFDBContext efdbContext)
+        {
+            _efdbContext = efdbContext;
+        }
+
         [HttpGet]
         public IEnumerable<Company> List()
         {
-            return null;
+            using (_efdbContext)
+            {
+                return _efdbContext.Companies.ToList();
+            }
         }
 
         [HttpPost]
@@ -21,6 +32,5 @@ namespace EFCorePractice.Controllers
         {
             return null;
         }
-
     }
 }
