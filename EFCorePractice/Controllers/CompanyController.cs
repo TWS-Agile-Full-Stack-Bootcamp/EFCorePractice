@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using EFCorePractice.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,9 +29,14 @@ namespace EFCorePractice.Controllers
         }
 
         [HttpPost]
-        public Company Add(Company company)
+        public async Task<Company> Add(Company company)
         {
-            return null;
+            using (_efdbContext)
+            {
+                var addedCompany = this._efdbContext.Add(company).Entity;
+                await this._efdbContext.SaveChangesAsync();
+                return addedCompany;
+            }
         }
     }
 }
