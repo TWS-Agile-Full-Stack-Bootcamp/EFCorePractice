@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using EFCorePractice.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,13 +12,13 @@ namespace EFCorePractice.Controllers
     public class CompanyController : ControllerBase
     {
         [HttpGet]
-        public IEnumerable<Company> List()
+        public async Task<IEnumerable<Company>> List()
         {
             return null;
         }
 
         [HttpPost]
-        public Company Add(Company company)
+        public async Task<Company> Add(Company company)
         {
             return null;
         }
