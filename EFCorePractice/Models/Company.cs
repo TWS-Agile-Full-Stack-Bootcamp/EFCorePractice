@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace EFCorePractice.Models
 {
     public class Company
@@ -7,9 +9,9 @@ namespace EFCorePractice.Models
         {
         }
 
-        public Company(string name)
+        public Company(string names)
         {
-            Name = name;
+            Names = names;
         }
 
         public int Id { get; set; }
