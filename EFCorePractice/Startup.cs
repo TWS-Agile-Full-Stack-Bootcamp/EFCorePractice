@@ -6,10 +6,12 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
 namespace EFCorePractice
 {
@@ -27,6 +29,10 @@ namespace EFCorePractice
         {
             services.AddControllers();
             services.AddSwaggerGen();
+            services.AddDbContext<CompanyDbContext>(options =>
+            {
+                options.UseMySql("server=10.211.55.2;user=root;database=db;password=pass;");
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -39,6 +45,14 @@ namespace EFCorePractice
             
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
+
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                using (var context = scope.ServiceProvider.GetService<CompanyDbContext>())
+                {
+                    context.Database.EnsureCreated();
+                }
+            }
 
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
             // specifying the Swagger JSON endpoint.
