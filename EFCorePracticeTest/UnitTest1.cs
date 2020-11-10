@@ -8,7 +8,6 @@ namespace EFCorePracticeTest
         [Fact]
         public void Test1()
         {
-
         }
     }
 }

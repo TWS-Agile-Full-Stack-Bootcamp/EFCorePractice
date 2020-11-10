@@ -21,6 +21,5 @@ namespace EFCorePractice.Controllers
         {
             return null;
         }
-
     }
 }
