@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using EFCorePractice.Models;
+using EFCorePractice.Dtos;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -12,13 +12,19 @@ namespace EFCorePractice.Controllers
     public class CompanyController : ControllerBase
     {
         [HttpGet]
-        public async Task<IEnumerable<Company>> List()
+        public async Task<ActionResult<IEnumerable<CompanyDto>>> List()
+        {
+            return null;
+        }
+
+        [HttpGet("/companies/{id}")]
+        public async Task<ActionResult<CompanyDto>> Get(int id)
         {
             return null;
         }
 
         [HttpPost]
-        public async Task<Company> Add(Company company)
+        public async Task<ActionResult<CompanyDto>> Add(CompanyDto company)
         {
             return null;
         }
